@@ -7,6 +7,12 @@
   "workspaces": {
     "packages": [
       "packages/*"
+    ],
+    "nohoist": [
+      "**/@fluentui/react",
+      "**/@fluentui/react/**",
+      "**/office-ui-fabric-react",
+      "**/office-ui-fabric-react/**"
     ]
   },
   "scripts": {
