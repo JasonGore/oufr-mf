@@ -19,4 +19,4 @@ export {
   Spinner,
   SpinnerSize,
   TextField
-} from 'office-ui-fabric-react';
+} from '@fluentui/react';

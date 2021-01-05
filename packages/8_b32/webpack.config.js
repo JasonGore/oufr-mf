@@ -7,7 +7,7 @@ module.exports = {
   mode: "development",
   devServer: {
     contentBase: path.join(__dirname, "dist"),
-    port: 7147,
+    port: 8032,
   },
   output: {
     publicPath: "auto",
