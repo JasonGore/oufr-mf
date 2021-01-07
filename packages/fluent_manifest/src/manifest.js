@@ -1,13 +1,20 @@
 import React from "react";
 
-const FluentVersions = {
+const FluentManifest = {
   "7.147.0": "7147",
+  "7.154.0": "7154",
   "8.0.0-beta.32": "8032"
 }
 
+export const FluentVersions = Object.keys(FluentManifest);
+
 const FluentScope = "fluentui";
 
+// TODO: should there be default values? determined by who (app, manifest, etc.)?
+export const FluentManifestContext = React.createContext({});
+
 // TODO: how do shared deps work with this approach? (react, react-dom, etc.)
+// TODO: how would this work for non-component entities? is this too much overhead for objects/functions/etc?
 function loadComponent(scope, module) {
   return async () => {
     // Initializes the share scope. This fills it with known provided modules from this build and all remotes
@@ -69,56 +76,54 @@ const useDynamicScript = (args) => {
 //       Should it use React.Suspense in every export? Fallback behavior? etc.
 // TODO: Need to reconcile system vs. component props. Use system props from context or static state?
 function ComponentLoader(props) {
-  const { ready, failed } = useDynamicScript({
-    url: props.system && props.system.url,
-  });
-
   if (!props.system) {
-    return <h2>No system specified</h2>;
+    return <h2>No system props specified</h2>;
   }
 
+  if (!props.system.version) {
+    return <h2>No version specified</h2>;
+  }
+
+  if (!props.manifestModule) {
+    return <h2>No module specified</h2>;
+  }
+
+  if (!FluentManifest[props.system.version]) {
+    return <h2>{FluentScope} {props.manifestModule} {props.system.version} not available</h2>;
+  }
+
+  const url = `http://localhost:${FluentManifest[props.system.version]}/remoteEntry.js`;
+  const scope = FluentScope;
+
+  const { ready, failed } = useDynamicScript({ url });
+
   if (!ready) {
-    return <h2>Loading dynamic script: {props.system.url}</h2>;
+    return <h2>Loading dynamic script: {url}</h2>;
   }
 
   if (failed) {
     // TODO: this doesn't seem to work on failure, doesn't work in original example either
-    return <h2>Failed to load dynamic script: {props.system.url}</h2>;
+    return <h2>Failed to load dynamic script: {url}</h2>;
   }
 
   const Component = React.lazy(
-    loadComponent(props.system.scope, props.system.module)
+    loadComponent(FluentScope, props.manifestModule)
   );
 
   return (
     <React.Suspense>
+      {props.system.version}
       <Component {...props} />
     </React.Suspense>
   );
 }
 
 const FluentComponent = (props) => {
-  if (!props.system.version) {
-    return <h2>No version specified</h2>;
-  }
-
-  if (!FluentVersions[props.system.version]) {
-    return <h2>{FluentScope} {props.system.module} {props.system.version} not available</h2>;
-  }
-
-  const systemProps = {
-    ...props,
-    system: {
-      ...props.system,
-      ...{
-        url: `http://localhost:${FluentVersions[props.system.version]}/remoteEntry.js`,
-        scope: FluentScope,
-      }
-    }
-  }
-
   return (
-    <ComponentLoader {...systemProps} />
+    <FluentManifestContext.Consumer>
+      {system =>
+      <ComponentLoader system={system} {...props} />}
+    </FluentManifestContext.Consumer>
   );
 }
 

@@ -1,5 +1,5 @@
 {
-  "name": "@oufr-mf/manifest",
+  "name": "@oufr-mf/fluent_manifest",
   "version": "0.0.1",
   "description": "A module federation prototype",
   "module": "lib/index.js",

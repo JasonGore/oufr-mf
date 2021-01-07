@@ -33,10 +33,11 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "manifest",
+      name: "fluent_manifest",
       filename: "remoteEntry.js",
       exposes: {
-        "./manifest": "./src/index"
+        "./manifest": "./src/manifest",
+        "./PrimaryButton": "./src/PrimaryButton"
       },
       shared: {
         react: { singleton: true },
