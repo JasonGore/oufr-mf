@@ -4,7 +4,7 @@ import { PrimaryButton } from 'office-ui-fabric-react';
 const PrimaryButtonIndicator = (props = {}) => {
     const newProps = {
         ...props,
-        text: `${props.text} (fabric v7)`
+        text: `${props.text} (fabric v6)`
     }
     return <PrimaryButton {...newProps} />;
 }

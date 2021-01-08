@@ -4,7 +4,7 @@ const app = express();
 
 let manifest = {
   fluentui: "v7.147.0",
-  possibleVersions: "v7.147.0,v8.0.0-beta.32"
+  possibleVersions: "v5.135.6,v6.214.1,v7.147.0,v8.0.0-beta.32"
 };
 
 app.set("views", path.join(__dirname, "views"));

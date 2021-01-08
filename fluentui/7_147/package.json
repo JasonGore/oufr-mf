@@ -1,5 +1,5 @@
 {
-  "name": "@oufr-mf/7_147",
+  "name": "@fluentui/7_147",
   "version": "0.0.1",
   "description": "A module federation prototype",
   "module": "lib/index.js",

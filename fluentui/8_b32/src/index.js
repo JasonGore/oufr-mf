@@ -1,7 +1,12 @@
 import {
+  Callout,
+  ChoiceGroup,
+  ComboBox,
+  DefaultButton,
   Dialog,
   DialogFooter,
   DialogType,
+  DirectionalHint,
   Dropdown,
   FocusZone,
   IconButton,
@@ -12,20 +17,27 @@ import {
   mergeStyles,
   MessageBar,
   MessageBarButton,
+  MessageBarType,
   Persona,
   PersonaInitialsColor,
   PersonaSize,
   Spinner,
   SpinnerSize,
-  TextField
+  TextField,
+  Toggle
 } from '@fluentui/react';
 
 import { PrimaryButton } from './PrimaryButton';
 
 export {
+  Callout,
+  ChoiceGroup,
+  ComboBox,
+  DefaultButton,
   Dialog,
   DialogFooter,
   DialogType,
+  DirectionalHint,
   Dropdown,
   FocusZone,
   IconButton,
@@ -36,12 +48,14 @@ export {
   mergeStyles,
   MessageBar,
   MessageBarButton,
+  MessageBarType,
   Persona,
   PersonaInitialsColor,
   PersonaSize,
   PrimaryButton,
   Spinner,
   SpinnerSize,
-  TextField
+  TextField,
+  Toggle
 };
 
