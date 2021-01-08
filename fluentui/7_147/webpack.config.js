@@ -3,14 +3,10 @@ const path = require("path");
 const deps = require("./package.json").dependencies;
 
 module.exports = {
-  entry: "./src/index",
+  entry: {},
   mode: "development",
-  devServer: {
-    contentBase: path.join(__dirname, "dist"),
-    port: 7147,
-  },
   output: {
-    publicPath: "auto",
+    path: path.join(__dirname, "../cdn/v7.147.0"),
   },
   module: {
     rules: [
